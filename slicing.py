@@ -52,14 +52,46 @@ def first4_last4_every_other_removed(seq):
 	pass
 
 def seq_reversed(seq):
-    pass
+	reversed_input = list(seq[::-1])
+
+	if isinstance(seq, tuple) == True:
+		seq_tuple = tuple(reversed_input) #converting the list into tuple
+		return seq_tuple
+
+	if isinstance(seq, str) == True:
+		seq_string = ''.join([str(elem) for elem in reversed_input])
+		return seq_string
+	else:
+		return reversed_input
+	pass
+
 
 def last_third_first_third_mid_third(seq):
-    pass
+	seq_list = list(seq)  # First convert input into list
+	size = len(seq_list)
+	if not size % 3 == 0:
+		print('Input needs to be in multiples of 3')
+		exit()
+	else:
+		increment = int(size / 3)
+		first_third = seq_list[0:increment]
+		middle_third = seq_list[increment:2 * increment]
+		last_third = seq_list[2 * increment:3 * increment]
+		total = last_third + first_third + middle_third
 
+	if isinstance(seq, tuple) == True:  # if given an tuple we will need to return a tuple
+		seq_tuple = tuple(total)  # converting the list into tuple
+		return seq_tuple
 
+	if isinstance(seq, str) == True:  # if given a string we will need to return a string
+		seq_string = ''.join([str(elem) for elem in total])
+		return seq_string
+	else:
+		return total
+	pass
 
 #Below are asserts I have written to test my code
+
 a_list = [1, 'A', 2, 'B', 3, 'C']
 a_string = "this is a string"
 a_tuple = (2, 54, 13, 12, 5, 32)
@@ -68,22 +100,33 @@ assert exchange_first_last(a_string) == "ghis is a strint"
 assert exchange_first_last(a_tuple) == (32, 54, 13, 12, 5, 2)
 
 removed_list = [1, 'A', 2, 'B', 3, 'C']
-removed_string=('ABCDEF')
-removed_tuple=(1, 2, 3, 4, 5, 6)
+removed_string = ('ABCDEF')
+removed_tuple = (1, 2, 3, 4, 5, 6)
 assert every_other_removed(removed_list) == [1, 2, 3]
 assert every_other_removed(removed_string) == ('ACE')
 assert every_other_removed(removed_tuple) == (1, 3, 5)
 
+first4last4_list = [1, 'A', 2, 'B', 3, 'C', 4, 'D', 5, 'E', 6, 'F']
+first4last4_string = ('0123456789AB')
+first4last4_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 
-#Below are asserst from the auto.py script
-assert exchange_first_last('something') == 'gomethins'
-assert exchange_first_last(list(range(10))) == [9, 1, 2, 3, 4, 5, 6, 7, 8, 0]
-assert exchange_first_last(tuple(range(10))) == (9, 1, 2, 3, 4, 5, 6, 7, 8, 0)
+assert first4_last4_every_other_removed(first4last4_list) == [3, 4]
+assert first4_last4_every_other_removed(first4last4_string) == ('46')
+assert first4_last4_every_other_removed(first4last4_tuple) == (5,7)
 
-assert every_other_removed('something') == 'smtig'
-assert every_other_removed(list(range(10))) == [0, 2, 4, 6, 8]
-assert every_other_removed(tuple(range(10))) == (0, 2, 4, 6, 8)
+reversed_list = [1,2,3,4,5,6,7,8,9,10]
+reversed_string = 'somewords'
+reversed_tuple = (1,2,3,4,5,6,7,8,9,10)
 
-assert first4_last4_every_other_removed('firstandlast') == 'tn'
-assert first4_last4_every_other_removed(list(range(10))) == [4]
-assert first4_last4_every_other_removed(tuple(range(10))) == (4,)
+assert seq_reversed(reversed_list) == [10,9,8,7,6,5,4,3,2,1]
+assert seq_reversed(reversed_string) == 'sdrowemos'
+assert seq_reversed(reversed_tuple) == (10,9,8,7,6,5,4,3,2,1)
+
+third_tuple_small = ('A', 'B', 'C')
+third_tuple_large = ('A', 'B', 'C', 'D', 'E', 'F')
+third_list = [1,2,3,4,5,6]
+third_string = '123ABC'
+assert last_third_first_third_mid_third(third_tuple_small) == ('C', 'A', 'B')
+assert last_third_first_third_mid_third(third_tuple_large) == ('E', 'F', 'A', 'B', 'C', 'D')
+assert last_third_first_third_mid_third(third_list) == [5, 6, 1, 2, 3, 4]
+assert last_third_first_third_mid_third(third_string) == ('BC123A')
