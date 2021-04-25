@@ -65,7 +65,6 @@ def seq_reversed(seq):
 		return reversed_input
 	pass
 
-
 def last_third_first_third_mid_third(seq):
 	seq_list = list(seq)  # First convert input into list
 	size = len(seq_list)
